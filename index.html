@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<img src="photobooth.png" alt="Us" style="width:200px; border-radius:20px; margin-top:20px;">
+<title>Will You Be My Valentine 💘</title>
+
+<style>
+/* 👉 EDIT THIS: background image file name */
+body {
+  margin: 0;
+  height: 100vh;
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* 👉 EDIT THIS: overlay opacity if text is hard to read */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: -1;
+}
+
+h1 {
+  margin-top: 80px;
+  color: #d6336c;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #adb5bd;
+  position: absolute;
+}
+
+/* ❤️ Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: floatUp 6s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* 💌 Letters section */
+#letters {
+  display: none;
+  margin-top: 50px;
+}
+
+/* ✉️ Envelope */
+.envelope {
+  width: 160px;
+  height: 110px;
+  background: #ff4d6d;
+  margin: 20px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-top: 60px solid #ff758f;
+  transform-origin: top;
+  transition: transform 0.8s;
+  z-index: 3;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.paper {
+  position: absolute;
+  bottom: -100%;
+  left: 10px;
+  width: 140px;
+  height: 160px;
+  background: white;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: bottom 0.8s;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+/* 👉 EDIT THIS: letter text color */
+.paper p {
+  font-size: 0.9em;
+  color: #d6336c;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 👉 EDIT THIS: main question text -->
+<h1 id="question">Will u be my Valentine? 💕</h1>
+
+<button id="yes">Yes 💖</button>
+<button id="no">No 💔</button>
+
+<div id="letters">
+  <h2>Open your letters 💌</h2>
+
+  <!-- 👉 EDIT THIS: Letter 1 text -->
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="paper">
+      <p>
+I love you more than I know how to say,<br>
+More than the words I swallow and keep.<br>
+More than the nights I pretend I’m okay,<br>
+More than the tears I don’t let myself weep.<br><br>
+
+I love you in ways I never knew,<br>
+In parts of my heart I thought were closed.<br>
+You found the broken and made them new,<br>
+You stayed when loving me wasn’t composed.<br><br>
+
+So if you ever wonder your worth,<br>
+Or doubt how deeply you’re adored—<br>
+I love you more than this whole earth,<br>
+And somehow, tomorrow, I’ll love you more.
+</p>
+
+    </div>
+  </div>
+
+  <!-- 👉 EDIT THIS: Letter 2 text -->
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="paper">
+      <img src="photobooth.jpg" alt="Us" style="width:200px; border-radius:20px; margin-top:20px;">
+      <p>I still remember our first kiss in that tiny photobooth, how the world seemed to shrink until it was just us, smiling and laughing, hearts racing. I can’t forget our first hug in coaching, the way you wrapped your arms around me and held on, even when it was a little awkward, and I felt completely safe in your warmth. I love the way your sun-kissed eyes light up when you look at me, how you sometimes jump just to kiss my forehead, and how you hug me over my shoulder even when you’re struggling to reach. Every little gesture, every touch, every laugh—it all reminds me that loving you is the easiest thing I’ve ever done, and I never want to stop. 
+💖</p>
+    </div>
+  </div>
+
+  <!-- 👉 EDIT THIS: Letter 3 text -->
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="paper">
+     <p>
+My Gorgey Jaanu Doll,<br><br>
+
+Every time I see you, my heart skips a beat. I love the way you smile, the way you laugh, and how even in the smallest moments you make my world brighter. You’re my favorite hello and my hardest goodbye. I love holding you close, seeing your sun-kissed eyes light up, and feeling your little playful touches that make me melt every single time. No matter what, I want you to know that I adore you—my Gorgey, my Jaanu, my Doll—and I’ll love you more with every heartbeat, forever and always.
+</p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const noButton = document.getElementById("no");
+const yesButton = document.getElementById("yes");
+
+/* No button runs */
+noButton.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  noButton.style.left = x + "px";
+  noButton.style.top = y + "px";
+});
+
+/* ❤️ Floating hearts */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+
+  /* 👉 EDIT THIS: heart emojis */
+  heart.innerText = ["💖","💕","💘","❤️"][Math.floor(Math.random()*4)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+/* Yes button */
+yesButton.addEventListener("click", () => {
+  document.getElementById("question").innerText = "YAY 💞 I love you!";
+  yesButton.style.display = "none";
+  noButton.style.display = "none";
+  document.getElementById("letters").style.display = "block";
+  setInterval(createHeart, 300);
+});
+
+/* Envelope open */
+function openEnvelope(env) {
+  env.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
